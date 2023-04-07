@@ -4,6 +4,6 @@ namespace ShapesGame.Services.Player
 {
     public interface IPlayerProvider
     {
-        GameObject Player { get; }
+        GameObject Player { get; set; }
     }
 }

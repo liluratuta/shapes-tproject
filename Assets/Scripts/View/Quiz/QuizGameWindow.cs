@@ -3,6 +3,7 @@ using ShapesGame.Services.StaticData;
 using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using Zenject;
 
 namespace ShapesGame.View.Quiz
 {
@@ -12,11 +13,18 @@ namespace ShapesGame.View.Quiz
 
         private QuizGamePresenter _presenter;
         private LinkClickHandler _linkClickHandler;
+        private IStaticDataService _staticDataService;
 
-        public void Init(QuizGame quizGame, IStaticDataService staticData)
+        [Inject]
+        public void Construct(IStaticDataService staticDataService)
         {
-            _presenter = new QuizGamePresenter(this, quizGame, staticData);
+            _staticDataService = staticDataService;
             _linkClickHandler = new LinkClickHandler(Label);
+        }
+
+        public void SetGame(QuizGame quizGame)
+        {
+            _presenter = new QuizGamePresenter(this, quizGame, _staticDataService);
         }
 
         public void SetAnswers(string answers) => 

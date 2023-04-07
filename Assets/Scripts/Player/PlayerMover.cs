@@ -1,7 +1,8 @@
 using ShapesGame.Services.Input;
 using ShapesGame.Services.Pause;
-using ShapesGame.StaticData;
+using ShapesGame.Services.StaticData;
 using UnityEngine;
+using Zenject;
 
 namespace ShapesGame.Player
 {
@@ -17,18 +18,20 @@ namespace ShapesGame.Player
         private Camera _camera;
         private IPauseService _pauseService;
 
-        public void Init(IInputService inputService, PlayerStaticData playerStaticData, IPauseService pauseService)
+        [Inject]
+        public void Construct(IInputService inputService,
+            IStaticDataService staticDataService,
+            IPauseService pauseService,
+            Camera mainCamera)
         {
             _pauseService = pauseService;
             _inputService = inputService;
-            _speed = playerStaticData.Speed;
+            _speed = staticDataService.PlayerData.Speed;
             _transform = transform;
+            _camera = mainCamera;
             
             _inputService.GameFieldClicked += OnClicked;
         }
-
-        public void SetCamera(Camera mainCamera) => 
-            _camera = mainCamera;
 
         private void Update()
         {

@@ -2,6 +2,7 @@ using System.Linq;
 using ShapesGame.Services.StaticData;
 using ShapesGame.StaticData;
 using UnityEngine;
+using Zenject;
 
 namespace ShapesGame.Player
 {
@@ -12,7 +13,8 @@ namespace ShapesGame.Player
         private PlayerStaticData _playerData;
         private GameStaticData _gameData;
 
-        public void Init(IStaticDataService dataService)
+        [Inject]
+        public void Construct(IStaticDataService dataService)
         {
             _playerData = dataService.PlayerData;
             _gameData = dataService.GameData;

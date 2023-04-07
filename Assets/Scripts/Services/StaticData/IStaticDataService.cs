@@ -8,5 +8,6 @@ namespace ShapesGame.Services.StaticData
         GameStaticData GameData { get; }
         ServerStaticData ServerData { get; }
         QuizStaticData QuizData { get; }
+        void Load();
     }
 }

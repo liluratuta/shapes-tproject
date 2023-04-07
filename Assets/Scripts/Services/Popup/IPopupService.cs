@@ -6,5 +6,6 @@ namespace ShapesGame.Services.Popup
     {
         void Show(string text, Vector3 position);
         void Hide();
+        void Prewarm();
     }
 }

@@ -1,4 +1,4 @@
-using ShapesGame.Factories;
+using ShapesGame.Infrastructure.Factories;
 using ShapesGame.View.Quiz;
 
 namespace ShapesGame.Quiz.States
