@@ -1,4 +1,4 @@
-using ShapesGame.Factories;
+using ShapesGame.Infrastructure.Factories;
 using ShapesGame.Services.Pause;
 
 namespace ShapesGame.Services.Victory

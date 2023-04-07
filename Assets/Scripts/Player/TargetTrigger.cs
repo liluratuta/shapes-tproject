@@ -2,9 +2,11 @@ using ShapesGame.Services.Input;
 using ShapesGame.Services.Pause;
 using ShapesGame.Services.Popup;
 using ShapesGame.Services.Quiz;
+using ShapesGame.Services.StaticData;
 using ShapesGame.StaticData;
 using ShapesGame.Target;
 using UnityEngine;
+using Zenject;
 
 namespace ShapesGame.Player
 {
@@ -18,15 +20,16 @@ namespace ShapesGame.Player
         private IQuizGameLauncher _quizGameLauncher;
         private IPauseService _pauseService;
 
-        public void Init(IPopupService popupService,
-            GameStaticData gameStaticData,
+        [Inject]
+        public void Construct(IPopupService popupService,
+            IStaticDataService staticDataService,
             IInputService inputService,
             IQuizGameLauncher quizGameLauncher,
             IPauseService pauseService)
         {
             _popupService = popupService;
-            _popupText = gameStaticData.PopupText;
-            _popupOffset = gameStaticData.PopupOffset;
+            _popupText = staticDataService.GameData.PopupText;
+            _popupOffset = staticDataService.GameData.PopupOffset;
             _inputService = inputService;
             _quizGameLauncher = quizGameLauncher;
             _pauseService = pauseService;

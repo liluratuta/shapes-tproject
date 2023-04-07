@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace ShapesGame.Factories
+namespace ShapesGame.Infrastructure.Factories
 {
     public interface IPlayerFactory
     {

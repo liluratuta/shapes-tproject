@@ -1,6 +1,6 @@
 using System;
 using System.Collections.Generic;
-using ShapesGame.Factories;
+using ShapesGame.Infrastructure.Factories;
 using ShapesGame.Quiz.Server;
 using ShapesGame.Services.Player;
 using ShapesGame.Services.Quiz;

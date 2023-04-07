@@ -1,4 +1,4 @@
-using ShapesGame.Factories;
+using ShapesGame.Infrastructure.Factories;
 using ShapesGame.Services.Quiz;
 using ShapesGame.View.Quiz;
 using Unity.VisualScripting;

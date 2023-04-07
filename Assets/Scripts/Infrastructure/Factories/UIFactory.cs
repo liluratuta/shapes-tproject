@@ -1,58 +1,51 @@
 using ShapesGame.Quiz;
 using ShapesGame.Services.Asset;
-using ShapesGame.Services.StaticData;
 using ShapesGame.View;
 using ShapesGame.View.Quiz;
 using UnityEngine;
+using Zenject;
 
-namespace ShapesGame.Factories
+namespace ShapesGame.Infrastructure.Factories
 {
     public class UIFactory : IUIFactory
     {
         private readonly IAssetProvider _assets;
-        private readonly IStaticDataService _dataService;
+        private readonly DiContainer _diContainer;
 
         private Transform _uiRoot;
 
-        public UIFactory(IAssetProvider assets, IStaticDataService dataService)
+        public UIFactory(IAssetProvider assets, DiContainer diContainer)
         {
             _assets = assets;
-            _dataService = dataService;
+            _diContainer = diContainer;
         }
 
         public void CreateUIRoot()
         {
             var prefab = _assets.Get(AssetPath.UIRoot);
-            _uiRoot = Object.Instantiate(prefab).transform;
+            _uiRoot = _diContainer.InstantiatePrefab(prefab).transform;
         }
 
         public QuizGameWindow CreateQuizWindow(QuizGame quizGame)
         {
             var prefab = _assets.Get(AssetPath.QuizWindow);
-            var window = Object.Instantiate(prefab, _uiRoot);
-
-            var quizView = window.GetComponentInChildren<QuizGameWindow>();
-            quizView.Init(quizGame, _dataService);
-            
-            return quizView;
+            var window = _diContainer.InstantiatePrefabForComponent<QuizGameWindow>(prefab, _uiRoot);
+            window.SetGame(quizGame);
+            return window;
         }
 
         public QuizErrorWindow CreateQuizErrorWindow(string message)
         {
             var prefab = _assets.Get(AssetPath.QuizErrorWindow);
-            var window = Object.Instantiate(prefab, _uiRoot);
-
-            var view = window.GetComponent<QuizErrorWindow>();
-            view.SetMessage(message);
-
-            return view;
+            var window = _diContainer.InstantiatePrefabForComponent<QuizErrorWindow>(prefab, _uiRoot);
+            window.SetMessage(message);
+            return window;
         }
 
         public VictoryWindow CreateVictoryWindow()
         {
             var prefab = _assets.Get(AssetPath.VictoryWindow);
-            var window = Object.Instantiate(prefab, _uiRoot);
-            return window.GetComponent<VictoryWindow>();
+            return _diContainer.InstantiatePrefabForComponent<VictoryWindow>(prefab, _uiRoot);
         }
     }
 }

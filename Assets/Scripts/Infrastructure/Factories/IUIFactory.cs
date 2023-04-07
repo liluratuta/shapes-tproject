@@ -2,7 +2,7 @@ using ShapesGame.Quiz;
 using ShapesGame.View;
 using ShapesGame.View.Quiz;
 
-namespace ShapesGame.Factories
+namespace ShapesGame.Infrastructure.Factories
 {
     public interface IUIFactory
     {
